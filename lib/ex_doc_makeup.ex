@@ -6,7 +6,7 @@
 #   In fact, Makeup's code was copy-pasted here.
 #   It's still not clear how we can make Makeup extensible, as no one is using it yet.
 #   Meanwhile, ExDocMakeup will work for its simple use case and keep a simple API
-#   despite changes to Makeup. 
+#   despite changes to Makeup.
 defmodule ExDocMakeup do
   @moduledoc """
   ExDoc-compliant markdown processor using [Makeup]() for syntax highlighting.
@@ -21,29 +21,26 @@ defmodule ExDocMakeup do
   @behaviour ExDoc.MarkdownProcessor
 
   # Callback implementations
-  
+
   @assets [
     # Read the CSS from the included file.
     # This allows us to have a custom CSS theme not included in Makeup
     # that supports both "day mode" and "night mode".
-    {"dist/ex_doc_makeup.css",
+    {"dist/ex_doc_makeup-css.css",
      :ex_doc_makeup
        |> :code.priv_dir
        |> Path.join("/assets/ex_doc_makeup.css")
        |> File.read!},
     # Get the Javascript snippet directly from Makeup.
     # If there is any need to customize it further, we can add a "ex_doc_makeup.js" file.
-    {"dist/ex_doc_makeup.js", HTMLFormatter.group_highlighter_javascript()}
+    {"dist/ex_doc_makeup-js.js", HTMLFormatter.group_highlighter_javascript()}
   ]
 
-  def assets(:html), do: @assets
-  def assets(:epub), do: @assets
+  def assets(_), do: @assets
 
-  def before_closing_head_tag(:html), do: ~S(<link rel="stylesheet" href="dist/ex_doc_makeup.css"/>)
-  def before_closing_head_tag(:epub), do: ~S(<link rel="stylesheet" href="dist/ex_doc_makeup.css"/>)
-  
-  def before_closing_body_tag(:html), do: ~S(<script src="dist/ex_doc_makeup.js"></script>)
-  def before_closing_body_tag(:epub), do: ~S(<script src="dist/ex_doc_makeup.js"></script>)
+  def before_closing_head_tag(_), do: ~S(<link rel="stylesheet" href="dist/ex_doc_makeup-css.css"/>)
+
+  def before_closing_body_tag(_), do: ~S(<script src="dist/ex_doc_makeup-js.js"></script>)
 
   def to_html(text, opts) do
     options =
@@ -55,7 +52,7 @@ defmodule ExDocMakeup do
              smartypants: Keyword.get(opts, :smartypants, true))
     text
     |> as_html!(options)
-    |> hljs_proof_code 
+    |> hljs_proof_code
   end
 
   # Internal details
