@@ -17,8 +17,12 @@ defmodule ExDocMakeup do
   """
   alias Earmark.Block
   alias Makeup.Formatters.HTML.HTMLFormatter
+  alias ExSpirit.TreeMap
+  alias Makeup.Lexers.ElixirLexer
 
   @behaviour ExDoc.MarkdownProcessor
+
+  @config_options_key :config_options
 
   # Callback implementations
 
@@ -55,7 +59,49 @@ defmodule ExDocMakeup do
     |> hljs_proof_code
   end
 
+  def configure(options) do
+    lexer_options = Keyword.get(options, :lexer_options, [])
+    processed_options = for {lexer, opts} <- lexer_options, into: %{} do
+      case lexer do
+        "elixir" -> {"elixir", process_elixir_lexer_options(opts)}
+        _ -> {lexer, opts}
+      end
+    end
+    put_options(processed_options)
+  end
+
   # Internal details
+
+  defp tree_map_from_strings(strings) do
+    Enum.reduce strings, TreeMap.new(), fn string, tree_map ->
+      tree_map |> TreeMap.add_text(string, string)
+    end
+  end
+
+  defp process_elixir_lexer_options(options) do
+    extra_declarations =
+      options
+      |> Keyword.get(:extra_declarations, [])
+      |> MapSet.new()
+
+    extra_def_like =
+      options
+      |> Keyword.get(:extra_def_like, [])
+      |> tree_map_from_strings
+
+    [extra_declarations: extra_declarations,
+      extra_def_like: extra_def_like]
+  end
+
+  # Store the options in the app's environment
+  defp put_options(options) do
+    Application.put_env(:ex_doc_makeup, @config_options_key, options)
+  end
+
+  # Get the options from the app's environment
+  defp get_options() do
+    Application.get_env(:ex_doc_makeup, @config_options_key, %{})
+  end
 
   @supported_languages ["elixir"]
 
@@ -73,13 +119,15 @@ defmodule ExDocMakeup do
   end
 
   defp code_renderer(%Block.Code{lines: lines, language: language}) do
+    # options = ExDoc.Markdown.get_markdown_processor_options()
+    lexer_options = get_options() |> Map.get(language, [])
     lang = pick_language(language)
     if lang in @supported_languages do
       # This branch doesn't need HTML entities to be escaped because
       # Makeup takes care of all the escaping.
       lines
       |> Enum.join("\n")
-      |> Makeup.highlight_inner_html(lexer: lang)
+      |> Makeup.highlight_inner_html(lexer: lang, lexer_options: lexer_options)
     else
       # In this branch, the text is included "raw", so we need to escape.
       lines
