@@ -29,11 +29,7 @@ defmodule ExDocMakeup do
     # Read the CSS from the included file.
     # This allows us to have a custom CSS theme not included in Makeup
     # that supports both "day mode" and "night mode".
-    {"dist/ex_doc_makeup-css.css",
-     :ex_doc_makeup
-       |> :code.priv_dir
-       |> Path.join("/assets/ex_doc_makeup.css")
-       |> File.read!},
+    {"dist/ex_doc_makeup-css.css", File.read!("assets/dist/ex_doc_makeup.css")},
     # Get the Javascript snippet directly from Makeup.
     # If there is any need to customize it further, we can add a "ex_doc_makeup.js" file.
     {"dist/ex_doc_makeup-js.js", HTMLFormatter.group_highlighter_javascript()}
