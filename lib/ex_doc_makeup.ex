@@ -20,7 +20,7 @@ defmodule ExDocMakeup do
   alias ExSpirit.TreeMap
   alias Makeup.Lexers.ElixirLexer
 
-  @behaviour ExDoc.MarkdownProcessor
+  @behaviour ExDoc.Markdown
 
   @config_options_key :config_options
 
