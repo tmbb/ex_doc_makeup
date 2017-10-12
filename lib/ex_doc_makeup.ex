@@ -18,7 +18,6 @@ defmodule ExDocMakeup do
   alias Earmark.Block
   alias Makeup.Formatters.HTML.HTMLFormatter
   alias ExSpirit.TreeMap
-  alias Makeup.Lexers.ElixirLexer
 
   @behaviour ExDoc.Markdown
 
