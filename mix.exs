@@ -22,8 +22,7 @@ defmodule ExDocMakeup.Mixfile do
   defp deps do
     [
       {:ex_doc, path: "../ex_doc"},
-      {:makeup, path: "../makeup/makeup", override: true},
-      {:makeup_elixir, "~> 0.2"}
+      {:makeup_elixir, "~> 0.3"}
     ]
   end
 end
