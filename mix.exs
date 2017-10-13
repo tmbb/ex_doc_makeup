@@ -7,6 +7,7 @@ defmodule ExDocMakeup.Mixfile do
       version: "0.1.0",
       elixir: "~> 1.4",
       start_permanent: Mix.env == :prod,
+      package: package(),
       deps: deps()
     ]
   end
@@ -15,6 +16,12 @@ defmodule ExDocMakeup.Mixfile do
   def application do
     [
       extra_applications: [:logger]
+    ]
+  end
+
+  def package do
+    [
+      files: ["assets/dist", "config", "lib", "mix.exs", "README.md", "CHANGELOG.md"]
     ]
   end
 
