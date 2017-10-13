@@ -21,6 +21,10 @@ defmodule ExDocMakeup.Mixfile do
 
   def package do
     [
+      name: :ex_doc_makeup,
+      licenses: ["BSD"],
+      maintainers: ["Tiago Barroso <tmbb@campus.ul.pt>"],
+      links: %{"GitHub" => "https://github.com/tmbb/makeup"},
       files: ["assets/dist", "config", "lib", "mix.exs", "README.md", "CHANGELOG.md"]
     ]
   end
