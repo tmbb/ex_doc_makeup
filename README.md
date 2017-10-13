@@ -29,8 +29,8 @@ It can be installed by adding `ex_doc_makeup` to your list of dependencies in `m
 def deps do
   [
     ...
-    # It requires a recent version of `:ex_doc`
-    {:ex_doc, "~> X.X.X", only: :dev},
+    # Note the ex_doc version, it won't work with earlier versions
+    {:ex_doc, ">= 0.18.1", only: :dev},
     {:ex_doc_makeup, "~> 0.1.0", only: :dev}
   ]
 end
