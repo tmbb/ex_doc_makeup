@@ -24,7 +24,7 @@ defmodule ExDocMakeup.Mixfile do
       name: :ex_doc_makeup,
       licenses: ["BSD"],
       maintainers: ["Tiago Barroso <tmbb@campus.ul.pt>"],
-      links: %{"GitHub" => "https://github.com/tmbb/makeup"},
+      links: %{"GitHub" => "https://github.com/tmbb/ex_doc_makeup"},
       files: ["assets/dist", "config", "lib", "mix.exs", "README.md", "CHANGELOG.md"]
     ]
   end
