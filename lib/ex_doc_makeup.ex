@@ -9,11 +9,12 @@
 #   despite changes to Makeup.
 defmodule ExDocMakeup do
   @moduledoc """
-  ExDoc-compliant markdown processor using [Makeup]() for syntax highlighting.
+  ExDoc-compliant markdown processor using [Makeup](https://github.com/tmbb/makeup) for syntax highlighting.
 
   This package is optimized to be used with ExDoc, and not alone by itself.
-  It's based on [Makeup](), whihc is just [Earmark](https://github.com/pragdave/earmark).
-  customized to use Makeup as a syntax highlighter.
+  It's just [Earmark](https://github.com/pragdave/earmark)
+  customized to use Makeup as a syntax highlighter plus some functions to make it
+  play well with ExDoc.
   """
   alias Earmark.Block
   alias Makeup.Formatters.HTML.HTMLFormatter
