@@ -32,8 +32,8 @@ defmodule ExDocMakeup.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, path: "../ex_doc"},
-      {:makeup_elixir, "~> 0.3"}
+      {:ex_doc, ">= 0.18.1"},
+      {:makeup_elixir, ">= 0.3.0"}
     ]
   end
 end
