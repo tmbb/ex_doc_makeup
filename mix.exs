@@ -7,6 +7,7 @@ defmodule ExDocMakeup.Mixfile do
       version: "0.1.0",
       elixir: "~> 1.4",
       start_permanent: Mix.env == :prod,
+      description: description(),
       package: package(),
       deps: deps()
     ]
@@ -17,6 +18,10 @@ defmodule ExDocMakeup.Mixfile do
     [
       extra_applications: [:logger]
     ]
+  end
+
+  def description do
+    "Markdown processor for ExDoc that uses Makeup for syntax highlighting"
   end
 
   def package do
