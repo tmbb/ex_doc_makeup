@@ -19,7 +19,7 @@ defmodule ExDocMakeup.SourceIncludePlugin do
     |> Enum.slice(range)
   end
 
-  defp execute_ast({:include, _, [file, opts]}) when is_binary(file) do
+  defp execute_ast_(file, opts) when is_binary(file) do
     # Get language from options; default is "elixir"
     lang = Keyword.get(opts, :lang, "elixir")
     # Get lines from options
@@ -51,9 +51,9 @@ defmodule ExDocMakeup.SourceIncludePlugin do
     CodeRenderer.code_block_renderer(code_lines, lang)
   end
 
-  defp execute_ast(_) do
-    raise "'include' directive: couldn't parse directive"
-  end
+  defp execute_ast({:include, _, [file, opts]}), do: execute_ast_(file, opts)
+  defp execute_ast({:include, _, [file]}), do: execute_ast_(file, [])
+  defp execute_ast(_), do: raise "'include' directive: couldn't parse directive"
 
   defp execute_line(line) do
     case Code.string_to_quoted(line) do

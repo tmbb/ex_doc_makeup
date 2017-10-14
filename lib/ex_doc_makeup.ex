@@ -15,9 +15,6 @@ defmodule ExDocMakeup do
   It's just [Earmark](https://github.com/pragdave/earmark)
   customized to use Makeup as a syntax highlighter plus some functions to make it
   play well with ExDoc.
-
-  $$ include "lib/ex_doc_makeup.ex", lines: 75..79
-  $$ include "lib/ex_doc_makeup/code_renderer.ex", block: "get_options"
   """
   alias Makeup.Formatters.HTML.HTMLFormatter
   alias ExSpirit.TreeMap
