@@ -9,7 +9,10 @@ defmodule ExDocMakeup.Mixfile do
       start_permanent: Mix.env == :prod,
       description: description(),
       package: package(),
-      deps: deps()
+      deps: deps(),
+      docs: [
+        markdown_processor: ExDocMakeup
+      ]
     ]
   end
 

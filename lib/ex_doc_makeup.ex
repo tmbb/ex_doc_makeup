@@ -15,14 +15,16 @@ defmodule ExDocMakeup do
   It's just [Earmark](https://github.com/pragdave/earmark)
   customized to use Makeup as a syntax highlighter plus some functions to make it
   play well with ExDoc.
+
+  $$ include "lib/ex_doc_makeup.ex", lines: 75..79
+  $$ include "lib/ex_doc_makeup/code_renderer.ex", block: "get_options"
   """
-  alias Earmark.Block
   alias Makeup.Formatters.HTML.HTMLFormatter
   alias ExSpirit.TreeMap
+  alias ExDocMakeup.SourceIncludePlugin
+  alias ExDocMakeup.CodeRenderer
 
   @behaviour ExDoc.Markdown
-
-  @config_options_key :config_options
 
   # Callback implementations
 
@@ -63,7 +65,8 @@ defmodule ExDocMakeup do
         _ -> {lexer, opts}
       end
     end
-    put_options(processed_options)
+
+    Application.get_env(:ex_doc_makeup, :config_options, processed_options)
   end
 
   # Internal details
@@ -89,54 +92,11 @@ defmodule ExDocMakeup do
       extra_def_like: extra_def_like]
   end
 
-  # Store the options in the app's environment
-  defp put_options(options) do
-    Application.put_env(:ex_doc_makeup, @config_options_key, options)
-  end
-
-  # Get the options from the app's environment
-  defp get_options() do
-    Application.get_env(:ex_doc_makeup, @config_options_key, %{})
-  end
-
-  @supported_languages ["elixir"]
-
-  # By default, we assume that a code block contains Elixir code until told otherwise.
-  # ExDoc is supposed to be used with Elixir projects after all.
-  defp pick_language(nil), do: "elixir"
-  defp pick_language("elixir"), do: "elixir"
-  defp pick_language(other), do: other
-
-  defp escape_html_entities(string) do
-    escape_map = [{"&", "&amp;"}, {"<", "&lt;"}, {">", "&gt;"}, {~S("), "&quot;"}]
-    Enum.reduce escape_map, string, fn {pattern, escape}, acc ->
-      String.replace(acc, pattern, escape)
-    end
-  end
-
-  defp code_renderer(%Block.Code{lines: lines, language: language}) do
-    # options = ExDoc.Markdown.get_markdown_processor_options()
-    lexer_options = get_options() |> Map.get(language, [])
-    lang = pick_language(language)
-    if lang in @supported_languages do
-      # This branch doesn't need HTML entities to be escaped because
-      # Makeup takes care of all the escaping.
-      lines
-      |> Enum.join("\n")
-      |> Makeup.highlight_inner_html(lexer: lang, lexer_options: lexer_options)
-    else
-      # In this branch, the text is included "raw", so we need to escape.
-      lines
-      |> Enum.join("\n")
-      |> escape_html_entities
-    end
-  end
-
   defp as_html!(source, options) do
-    render_code = fn block ->
-      code_renderer(block)
-    end
-    Earmark.as_html!(source, Map.put(options, :render_code, render_code))
+    Earmark.as_html!(source,
+      %{options |
+          render_code: &CodeRenderer.code_renderer/1,
+          plugins: %{"" => SourceIncludePlugin}})
   end
 
   # TODO: Generalize this to more languages.
