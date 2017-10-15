@@ -27,8 +27,8 @@ defmodule ExDocMakeup.CodeRenderer do
 
   def code_renderer(%Block.Code{lines: lines, language: language}) do
     # options = ExDoc.Markdown.get_markdown_processor_options()
-    lexer_options = Map.get(get_options(), language, [])
     lang = pick_language(language)
+    lexer_options = Map.get(get_options(), lang, [])
     if lang in @supported_languages do
       # This branch doesn't need HTML entities to be escaped because
       # Makeup takes care of all the escaping.
