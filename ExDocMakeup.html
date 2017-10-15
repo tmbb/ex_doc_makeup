@@ -1,0 +1,356 @@
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.18.1">
+    <title>ExDocMakeup – ex_doc_makeup v0.1.1</title>
+    <link rel="stylesheet" href="dist/app-c922dbe7ef.css" />
+    
+      <link rel="canonical" href="https://hexdocs.pm/ex_doc_makeup/ExDocMakeup.html" />
+    
+    <script src="dist/sidebar_items-555be2f5ad.js"></script>
+    
+    <link rel="stylesheet" href="dist/ex_doc_makeup-css.css"/>
+    
+    
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+
+    <div class="main">
+<button class="sidebar-toggle">
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
+</button>
+<section class="sidebar">
+
+  
+  <a href="api-reference.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        ex_doc_makeup
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.1.1
+      </h2>
+    </div>
+    
+  </a>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="search" aria-label="Search" autocomplete="off" />
+  </form>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">ex_doc_makeup v0.1.1</small>
+        ExDocMakeup
+        
+      </h1>
+
+      
+        <section id="moduledoc">
+          <p>ExDoc-compliant markdown processor using <a href="https://github.com/tmbb/makeup">Makeup</a> for syntax highlighting.</p>
+<p>This package is optimized to be used with ExDoc, and not alone by itself.
+It’s just <a href="https://github.com/pragdave/earmark">Earmark</a>
+customized to use Makeup as a syntax highlighter plus some functions to make it
+play well with ExDoc.</p>
+
+        </section>
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+          
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#assets/1">assets(_)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Assets specific to the markdown implementation</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#before_closing_body_tag/1">before_closing_body_tag(_)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Literal content to be written to the file just before the closing body tag</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#before_closing_head_tag/1">before_closing_head_tag(_)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Literal content to be written to the file just before the closing head tag</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#configure/1">configure(options)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>A function that accepts configuration options and configures the markdown processor</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#to_html/2">to_html(text, opts)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Converts markdown into HTML</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+        </section>
+      
+
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="assets/1">
+  
+  
+  <div class="detail-header">
+    <a href="#assets/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">assets(_)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Assets specific to the markdown implementation.</p>
+<p>This callback takes the documentation format (<code class="inline">:html</code> or <code class="inline">:epub</code>) as an argument
+and must return a list of pairs of the form <code class="inline">{basename, content}</code> where:</p>
+<ul>
+<li><code class="inline">basename</code> - relative path that will be written inside the <code class="inline">doc/</code> directory.
+</li>
+<li><code class="inline">content</code> - is a binary with the full contents of the file that will be written to <code class="inline">basename</code>.
+</li>
+</ul>
+<h2 id="assets/1-epub-documentation-gotchas" class="section-heading">
+  <a href="#assets/1-epub-documentation-gotchas" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  EPUB Documentation Gotchas
+</h2>
+
+<p>Generating HTML documentation is simple, and it works exacly as you would expect
+for a webpage. The EPUB file format, on the other hand, may cause some surprise.</p>
+<p>Apparently, an EPUB file expects all assets to have a unique name <em>when
+discarding the file extension</em>.</p>
+<p>This creates problems if you include, for example, the files <code class="inline">custom.js</code>
+and <code class="inline">custom.css</code>. Because the filename without the extension is equal (<code class="inline">custom</code>),
+you will get an unreadable EPUB. It’s possible to go around this limitation by simply
+giving the files unique names:</p>
+<ul>
+<li><code class="inline">custom.js</code> becomes <code class="inline">custom-js.js</code> <em>and</em>
+</li>
+<li><code class="inline">custom.css</code> becomes <code class="inline">custom-css.css</code>
+</li>
+</ul>
+<h2 id="assets/1-example" class="section-heading">
+  <a href="#assets/1-example" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Example
+</h2>
+
+<pre><code class="nohighlight makeup"><span class="kd">def</span><span class="w"> </span><span class="nf">callback</span><span class="w"> </span><span class="n">assets</span><span class="p" data-group-id="1">(</span><span class="bp">_</span><span class="p" data-group-id="1">)</span><span class="w"> </span><span class="k" data-group-id="7">do</span><span class="w">
+  </span><span class="p" data-group-id="6">[</span><span class="p" data-group-id="3">{</span><span class="s2">&quot;dist/custom-css.css&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">custom_css_content</span><span class="p" data-group-id="2">()</span><span class="p" data-group-id="3">}</span><span class="p">,</span><span class="w">
+   </span><span class="p" data-group-id="5">{</span><span class="s2">&quot;dist/custom-js.js&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">custom_js_content</span><span class="p" data-group-id="4">()</span><span class="p" data-group-id="5">}</span><span class="p" data-group-id="6">]</span><span class="w">
+</span><span class="k" data-group-id="7">end</span></code></pre>
+<p>Callback implementation for <a href="https://hexdocs.pm/ex_doc/0.18.1/ExDoc.Markdown.html#c:assets/1"><code class="inline">ExDoc.Markdown.assets/1</code></a>.</p>
+
+  </section>
+</div>
+<div class="detail" id="before_closing_body_tag/1">
+  
+  
+  <div class="detail-header">
+    <a href="#before_closing_body_tag/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">before_closing_body_tag(_)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Literal content to be written to the file just before the closing body tag.</p>
+<p>This callback takes the documentation format (<code class="inline">:html</code> or <code class="inline">:epub</code>) as an argument
+and returns a literal string. It is useful when the markdown processor needs to
+a include extra JavaScript.</p>
+<h2 id="before_closing_body_tag/1-example" class="section-heading">
+  <a href="#before_closing_body_tag/1-example" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Example
+</h2>
+
+<pre><code class="nohighlight makeup"><span class="kd">def</span><span class="w"> </span><span class="nf">callback</span><span class="w"> </span><span class="n">before_closing_body_tag</span><span class="p" data-group-id="8">(</span><span class="bp">_</span><span class="p" data-group-id="8">)</span><span class="w"> </span><span class="k" data-group-id="9">do</span><span class="w">
+  </span><span class="c1"># Include the Javascript specified in the assets/1 callback
+</span><span class="w">  </span><span class="s">~S(&lt;script src=&quot;dist/custom-js.js&quot;&gt;&lt;/script&gt;)</span><span class="w">
+</span><span class="k" data-group-id="9">end</span></code></pre>
+<p>Callback implementation for <a href="https://hexdocs.pm/ex_doc/0.18.1/ExDoc.Markdown.html#c:before_closing_body_tag/1"><code class="inline">ExDoc.Markdown.before_closing_body_tag/1</code></a>.</p>
+
+  </section>
+</div>
+<div class="detail" id="before_closing_head_tag/1">
+  
+  
+  <div class="detail-header">
+    <a href="#before_closing_head_tag/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">before_closing_head_tag(_)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Literal content to be written to the file just before the closing head tag.</p>
+<p>This callback takes the documentation format (<code class="inline">:html</code> or <code class="inline">:epub</code>) as an argument
+and returns a literal string. It is useful when the markdown processor needs to
+a include extra CSS.</p>
+<h2 id="before_closing_head_tag/1-example" class="section-heading">
+  <a href="#before_closing_head_tag/1-example" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Example
+</h2>
+
+<pre><code class="nohighlight makeup"><span class="kd">def</span><span class="w"> </span><span class="nf">callback</span><span class="w"> </span><span class="n">before_closing_head_tag</span><span class="p" data-group-id="10">(</span><span class="bp">_</span><span class="p" data-group-id="10">)</span><span class="w"> </span><span class="k" data-group-id="11">do</span><span class="w">
+  </span><span class="c1"># Include the CSS specified in the assets/1 callback
+</span><span class="w">  </span><span class="s">~S(&lt;link rel=&quot;stylesheet&quot; href=&quot;dist/custom-css.css&quot;/&gt;)</span><span class="w">
+</span><span class="k" data-group-id="11">end</span></code></pre>
+<p>Callback implementation for <a href="https://hexdocs.pm/ex_doc/0.18.1/ExDoc.Markdown.html#c:before_closing_head_tag/1"><code class="inline">ExDoc.Markdown.before_closing_head_tag/1</code></a>.</p>
+
+  </section>
+</div>
+<div class="detail" id="configure/1">
+  
+  
+  <div class="detail-header">
+    <a href="#configure/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">configure(options)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>A function that accepts configuration options and configures the markdown processor.</p>
+<p>It is run once when <code class="inline">:ex_doc</code> is loaded, and the return value is discarded.
+Modules that implement this behaviour will probably store the options somewhere
+so that they can be accessed when needed.</p>
+<p>The format of the options as well as what the function does with them is
+completely up to the module that implements the behaviour.</p>
+<p>Callback implementation for <a href="https://hexdocs.pm/ex_doc/0.18.1/ExDoc.Markdown.html#c:configure/1"><code class="inline">ExDoc.Markdown.configure/1</code></a>.</p>
+
+  </section>
+</div>
+<div class="detail" id="to_html/2">
+  
+  
+  <div class="detail-header">
+    <a href="#to_html/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">to_html(text, opts)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Converts markdown into HTML.</p>
+<p>Callback implementation for <a href="https://hexdocs.pm/ex_doc/0.18.1/ExDoc.Markdown.html#c:to_html/2"><code class="inline">ExDoc.Markdown.to_html/2</code></a>.</p>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.18.1),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle"><span class="sr-only">Switch theme</span></button>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-778c9ef903.js"></script>
+  
+  <script src="dist/ex_doc_makeup-js.js"></script>
+  
+  
+  </body>
+</html>
+
