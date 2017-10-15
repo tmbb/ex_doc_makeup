@@ -63,7 +63,7 @@ defmodule ExDocMakeup do
       end
     end
 
-    Application.get_env(:ex_doc_makeup, :config_options, processed_options)
+    Application.put_env(:ex_doc_makeup, :config_options, processed_options)
   end
 
   # Internal details
