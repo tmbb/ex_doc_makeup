@@ -2,4 +2,4 @@
   "ex_doc": {:hex, :ex_doc, "0.18.1", "37c69d2ef62f24928c1f4fdc7c724ea04aecfdf500c4329185f8e3649c915baf", [:mix], [{:earmark, "~> 1.1", [hex: :earmark, optional: false]}]},
   "ex_spirit": {:hex, :ex_spirit, "0.3.4", "cf21c0fa0349445da40091df1fb8141d0e802f83b83659132713012bbe7fb398", [:mix], []},
   "makeup": {:hex, :makeup, "0.3.0", "c8223bdbddf4d6f09902a483e5ba1dec694b3747700e4d4ed00f13c08250c21d", [:mix], [{:ex_spirit, "~> 0.3.4", [hex: :ex_spirit, optional: false]}]},
-  "makeup_elixir": {:hex, :makeup_elixir, "0.3.0", "31503676b444e2bc793941bc2e8d6766acc6af1120b43a7ddce5f0ff47c5df27", [:mix], [{:makeup, "0.3.0", [hex: :makeup, optional: false]}]}}
+  "makeup_elixir": {:hex, :makeup_elixir, "0.3.1", "46a43920d74999b33f866de14448ab8ade50b691f18f4520b769129af8c54e4b", [:mix], [{:makeup, "0.3.0", [hex: :makeup, optional: false]}]}}
