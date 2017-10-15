@@ -41,7 +41,7 @@ defmodule ExDocMakeup.Mixfile do
   defp deps do
     [
       {:ex_doc, ">= 0.18.1"},
-      {:makeup_elixir, ">= 0.3.0"}
+      {:makeup_elixir, ">= 0.3.1"}
     ]
   end
 end
