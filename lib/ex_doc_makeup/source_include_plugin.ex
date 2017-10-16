@@ -2,24 +2,51 @@ defmodule ExDocMakeup.SourceIncludePlugin do
   @moduledoc false
   alias ExDocMakeup.CodeRenderer
 
+  defp is_fragment_marker?(line, marker) do
+    trimmed = String.trim_leading(line)
+    String.starts_with?(trimmed, "#{marker} !begin:") or
+      String.starts_with?(trimmed, "#{marker} !end:")
+  end
+
+  defp reject_fragment_markers(lines, marker) do
+    Enum.reject(lines, fn line -> is_fragment_marker?(line, marker) end)
+  end
+
   defp extract_block(file, block, marker) do
     content = File.read!(file)
-    case Regex.run(~r/\n\s*#{marker} !begin: #{block}\n(.*)\n\s*#{marker} !end: #{block}\n/su,
-                   content,
-                   capture: :all_but_first) do
-      [ block_content | _] -> String.split(block_content, "\n")
-      _ -> raise "'include' directive: block wasn't found"
+    fragment = Regex.run(
+      ~r/\n\s*#{marker} !begin: #{block}\n(.*)\n\s*#{marker} !end: #{block}\n/su,
+      content,
+      capture: :all_but_first)
+
+    case fragment do
+      [block_content | _] ->
+        block_content
+        |> String.split("\n")
+        |> reject_fragment_markers(marker)
+
+      _ ->
+        raise "'include' directive: block '#{block}' wasn't found"
     end
   end
 
-  defp extract_lines(file, range) do
+  defp extract_lines(file, range, marker) do
     file
     |> File.read!
     |> String.split("\n")
     |> Enum.slice(range)
+    |> reject_fragment_markers(marker)
+  end
+
+  defp extract_file(file, marker) do
+    file
+    |> File.read!
+    |> String.split("\n")
+    |> reject_fragment_markers(marker)
   end
 
   defp execute_ast_(file, opts) when is_binary(file) do
+    marker = "#"
     # Get language from options; default is "elixir"
     lang = Keyword.get(opts, :lang, "elixir")
     # Get lines from options
@@ -34,18 +61,21 @@ defmodule ExDocMakeup.SourceIncludePlugin do
     # Should we keep indent?
     _trim = Keyword.get(opts, :dedent, false)
     # Extract the lilnes of code from the file
-    code_lines = case {lines, block} do
-      # Valid combinations
-      {nil, nil} ->
-        # Get the whole file
-        file |> File.read! |> String.split("\n")
-      {lines, nil} ->
-        extract_lines(file, lines)
-      {nil, block} ->
-        extract_block(file, block, "#")
-      # Invalid combination
-      {_lines, _block} ->
-        raise "'include' directive: can't give both `lines` and `block` options."
+    code_lines =
+      case {lines, block} do
+        # Valid combinations
+        {nil, nil} ->
+          extract_file(file, marker)
+
+        {lines, nil} ->
+          extract_lines(file, lines, marker)
+
+        {nil, block} ->
+          extract_block(file, block, marker)
+
+        # Invalid combination
+        {_lines, _block} ->
+          raise "'include' directive: can't give both `lines` and `block` options."
     end
 
     CodeRenderer.code_block_renderer(code_lines, lang)
