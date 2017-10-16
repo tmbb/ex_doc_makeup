@@ -23,6 +23,8 @@ defmodule ExDocMakeup do
 
   @behaviour ExDoc.Markdown
 
+  @external_resource "assets/dist/ex_doc_makeup.css"
+
   # Callback implementations
 
   @assets [
