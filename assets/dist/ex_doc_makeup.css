@@ -59,7 +59,7 @@ code.makeup {
 .makeup .ni {color: #ce5c00; } /* Tok.name_entity */
 .makeup .nl {color: #f57900; } /* Tok.name_label */
 .makeup .nn {color: #000000; } /* Tok.name_namespace */
-.makeup .no {color: #000000; } /* Tok.name_constant */
+.makeup .no {color: #0000cf; } /* Tok.name_constant */
 .makeup .nt {color: #204a87; font-weight: bold; } /* Tok.name_tag */
 .makeup .nv {color: #000000; } /* Tok.name_variable */
 .makeup .nx {color: #000000; } /* Tok.name_other */
@@ -78,7 +78,7 @@ code.makeup {
 .makeup .sh {color: #4e9a06; } /* Tok.string_heredoc */
 .makeup .si {color: #5c35cc; } /* Tok.string_interpol */
 .makeup .sr {color: #cc0000; } /* Tok.string_regex */
-.makeup .ss {color: #4e9a06; } /* Tok.string_symbol */
+.makeup .ss {color: #f57900; } /* Tok.string_symbol */
 .makeup .sx {color: #4e9a06; } /* Tok.string_other */
 .makeup .sx {color: #f56900; } /* Tok.string_sigil */
 .makeup .vc {color: #000000; } /* Tok.name_variable_class */
