@@ -9,7 +9,14 @@ code.makeup {
   white-space: pre;
 }
 
-.makeup {}
+.makeup .unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 .makeup .hll {background-color: #ffffcc}
 .makeup .bp {color: #3465a4; } /* Tok.name_builtin_pseudo */
 .makeup .c {color: #8E908C; } /* Tok.comment */
@@ -42,7 +49,7 @@ code.makeup {
 .makeup .kr {color: #204a87; font-weight: bold; } /* Tok.keyword_reserved */
 .makeup .kt {color: #204a87; font-weight: bold; } /* Tok.keyword_type */
 .makeup .l {color: #000000; } /* Tok.literal */
-.makeup .ld {color: #000000; } /* Tok.literal_date */
+.makeup .ld {color: #8f5902; } /* Tok.literal_date */
 .makeup .m {color: #0000cf; font-weight: bold; } /* Tok.number */
 .makeup .mb {color: #0000cf; font-weight: bold; } /* Tok.number_bin */
 .makeup .mf {color: #0000cf; font-weight: bold; } /* Tok.number_float */
@@ -126,7 +133,7 @@ code.makeup {
 .night-mode .makeup .kr {color: #815ba4; font-weight: normal } /* Tok.keyword_reserved */
 .night-mode .makeup .kt {color: #fec418; font-weight: normal } /* Tok.keyword_type */
 .night-mode .makeup .l {color: #f99b15; } /* Tok.literal */
-.night-mode .makeup .ld {color: #f99b15; } /* Tok.literal_date */
+.night-mode .makeup .ld {color: #776e71; } /* Tok.literal_date */
 .night-mode .makeup .m {color: #f99b15; } /* Tok.number */
 .night-mode .makeup .mb {color: #f99b15; font-weight: normal } /* Tok.number_bin */
 .night-mode .makeup .mf {color: #f99b15; font-weight: normal } /* Tok.number_float */

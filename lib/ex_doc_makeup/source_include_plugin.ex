@@ -15,7 +15,7 @@ defmodule ExDocMakeup.SourceIncludePlugin do
   defp extract_block(file, block, marker) do
     content = File.read!(file)
     fragment = Regex.run(
-      ~r/\n\s*#{marker} !begin: #{block}\n(.*)\n\s*#{marker} !end: #{block}\n/su,
+      ~r/\n\s*#{marker}! begin: #{block}\n(.*)\n\s*#{marker}! end: #{block}\n/su,
       content,
       capture: :all_but_first)
 

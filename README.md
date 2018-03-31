@@ -81,98 +81,8 @@ as I've [once promised José Valim](https://elixirforum.com/t/discussion-about-s
 
 ## Experimental Features
 
-### Advanced Options
-
-*(this API should be considered unstable; the option names might change in the future)*
-
-It's possible to configure Makeup to highlight some custom keywords
-through the `:lexer_options` keyword, which lives under the `:markdown_processor_options` keyword.
-There are two kinds of keywords that can be highlighted:
-
-  * `extra_def_like` - a list of keywords that should be highlighted just like
-    `def`, `defp`, `defmacro`, etc.
-    These keywords are not only highlighted as keywords, but the identifier
-    that comes after them is highlighted as a function name in a function definition.
-    You may this option to define keywords that define functions or macros
-    (i.e. macros that expand to `def` or `defmacro`)
-
-  * `extra_declarations` - a list containing other keywords that should be highlighted
-    like `defmodule`, `def`, etc.
-    They are highlighted alone and have no effect the highlighting of other tokens.
-    You may use this function for macros that expand to `defmodule`.
-
-To configure these options, add the following to your `:docs` key:
-
-```elixir
-  docs: [
-    ...
-    markdown_processor: ExDocMakeup,
-    markdown_processor_options: [
-      # `lexer_options` should be a map (not a keyword list!)
-      lexer_options: %{
-        # These options belong to the lexer for the "elixir" language
-        "elixir" => [
-          # Keywords as explained above (will be used by Makeup)
-          extra_def_like: [...],
-          extra_declarations: [...]],
-      }
-    ]
-    ...
-  ]
-```
-
-**A word of warning:**
-Judicious use of these options may enhance readability, but be sure to use them
-only when they make sense.
-The goal of syntax highlighting is to make it clearer what is going on in the code.
-Be careful to only highlight as keywords things what actually *work* like `def` or `defmodule`
-behind the scenes.
-If you use these feature in an abusive way, you may actually deceive the reader.
-
-#### Example
-
-Because the above is a little abstract, let's illustrate it with a concrete example.
-
-The [ProtocolEx](https://hexdocs.pm/protocol_ex/readme.html) package,
-by [OvermindDL1](https://github.com/OvermindDL1), defines some macros that expand to
-`def`, `defmacro` or `defmodule`.
-The highlighted source is more readable and more consistent if those keywords
-are highlighted like `def` or `defmodule`.
-To enhance readability, we can pass the following options:
-
-```elixir
-  docs: [
-    ...
-    markdown_processor: ExDocMakeup,
-    markdown_processor_options: [
-      lexer_options: %{
-        "elixir" => [
-          extra_declarations: [
-            "defimplEx", "defimpl_ex",
-            "defprotocolEx", "defprotocol_ex"],
-          extra_def_like: ["deftest"]]
-      }
-    ],
-    ...
-  ]
-```
-
-This produces the following results:
-
-![Example from ProtocolEx (extra keywords)](assets/doc/protocol_ex_example_extra_keywords.png)
-
-You can see that:
-
-  * the `:extra_declaration` keywords are highlighted as keywords and
-
-  * the `:extra_def_like` keyword (`deftest`) is highlighted like
-    the `def` keyword and the identifier that follows it is highlighted
-    like a function name
-
-Without these configuration options, the keywords are highlighted like a normal
-identifier:
-
-![Example from ProtocolEx (no extra keywords)](assets/doc/protocol_ex_example_no_extra_keywords.png)
+The ability to pass additional keywords has been removed for performance reasons.
+It might be added in future versions.
 
 ### Markdown Plugins
 
@@ -214,7 +124,7 @@ This is inconvenient because line numbers may change if you change the contents 
 
 #### Include a block of code:
 
-To include a block of code, independent on the line numbers, you must delimit it with special comments `# !begin: block_name` and `# !end: block_name`.
+To include a block of code, independent on the line numbers, you must delimit it with special comments `#! begin: block_name` and `#! end: block_name`.
 There has to be exactly 1 whitespace character between the `#` and the `!`.
 For example:
 
@@ -284,12 +194,12 @@ And the `lib/ex_doc_makeup/code_renderer.ex` file contains the following fragmen
 ```elixir
 ...
 
-  # !begin: get_options
+  #! begin: get_options
   # Get the options from the app's environment
   defp get_options() do
     Application.get_env(:ex_doc_makeup, :config_options, %{})
   end
-  # !end: get_options
+  #! end: get_options
 ...
 ```
 
@@ -302,7 +212,7 @@ Although I show an example of running the directive inside a `@moduledoc` attrib
 #### Feedback?
 
 What do you think of this API?
-What do you think of the block delimiters (`# !begin:` and `# !end:`)?
+What do you think of the block delimiters (`#! begin:` and `#! end:`)?
 What other features would you like to have?
 
 #### Inspiration

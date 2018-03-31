@@ -17,7 +17,6 @@ defmodule ExDocMakeup do
   play well with ExDoc.
   """
   alias Makeup.Formatters.HTML.HTMLFormatter
-  alias ExSpirit.TreeMap
   alias ExDocMakeup.SourceIncludePlugin
   alias ExDocMakeup.CodeRenderer
 
@@ -58,39 +57,11 @@ defmodule ExDocMakeup do
 
   def configure(options) do
     lexer_options = Keyword.get(options, :lexer_options, [])
-    processed_options = for {lexer, opts} <- lexer_options, into: %{} do
-      case lexer do
-        "elixir" -> {"elixir", process_elixir_lexer_options(opts)}
-        _ -> {lexer, opts}
-      end
-    end
-
+    processed_options = for {lexer, opts} <- lexer_options, into: %{}, do: {lexer, opts}
     Application.put_env(:ex_doc_makeup, :config_options, processed_options)
   end
 
   # Internal details
-
-  defp tree_map_from_strings(strings) do
-    Enum.reduce strings, TreeMap.new(), fn string, tree_map ->
-      tree_map |> TreeMap.add_text(string, string)
-    end
-  end
-
-  defp process_elixir_lexer_options(options) do
-    extra_declarations =
-      options
-      |> Keyword.get(:extra_declarations, [])
-      |> MapSet.new()
-
-    extra_def_like =
-      options
-      |> Keyword.get(:extra_def_like, [])
-      |> tree_map_from_strings
-
-    [extra_declarations: extra_declarations,
-      extra_def_like: extra_def_like]
-  end
-
   defp as_html!(source, options) do
     Earmark.as_html!(source,
       %{options |
