@@ -4,7 +4,7 @@ defmodule ExDocMakeup.Mixfile do
   def project do
     [
       app: :ex_doc_makeup,
-      version: "0.1.2",
+      version: "0.2.0",
       elixir: "~> 1.4",
       start_permanent: Mix.env == :prod,
       description: description(),
@@ -40,9 +40,9 @@ defmodule ExDocMakeup.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, ">= 0.18.1"},
-      {:makeup, path: "../makeup/makeup"},
-      {:makeup_elixir, path: "../makeup/makeup_elixir"}
+      {:ex_doc, "~> 0.18.3"},
+      {:makeup, "~> 0.4.0"},
+      {:makeup_elixir, "~> 0.4.0"}
     ]
   end
 end
