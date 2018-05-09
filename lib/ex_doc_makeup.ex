@@ -1,12 +1,3 @@
-# Some important notes:
-# - this module has been refactores into it's own package so that we can provide´
-#   a simple API for ExDocs users who want to use Makeup for syntax highlighting
-#   in the docs.
-# - Despite the name, it doesn't actually depend on Makeup.
-#   In fact, Makeup's code was copy-pasted here.
-#   It's still not clear how we can make Makeup extensible, as no one is using it yet.
-#   Meanwhile, ExDocMakeup will work for its simple use case and keep a simple API
-#   despite changes to Makeup.
 defmodule ExDocMakeup do
   @moduledoc """
   ExDoc-compliant markdown processor using [Makeup](https://github.com/tmbb/makeup) for syntax highlighting.

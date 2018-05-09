@@ -1,10 +1,12 @@
 defmodule ExDocMakeup.Mixfile do
   use Mix.Project
 
+  @version "0.3.0"
+
   def project do
     [
       app: :ex_doc_makeup,
-      version: "0.2.0",
+      version: @version,
       elixir: "~> 1.4",
       start_permanent: Mix.env == :prod,
       description: description(),
@@ -41,8 +43,9 @@ defmodule ExDocMakeup.Mixfile do
   defp deps do
     [
       {:ex_doc, "~> 0.18.3"},
-      {:makeup, "~> 0.4.0"},
-      {:makeup_elixir, "~> 0.4.0"}
+      {:makeup, "~> 0.5.0"},
+      # {:makeup_elixir, "~> 0.4.0"}
+      {:makeup_elixir, "~> 0.5.0"}
     ]
   end
 end
