@@ -1,7 +1,7 @@
 defmodule ExDocMakeup.Mixfile do
   use Mix.Project
 
-  @version "0.3.0"
+  @version "0.4.0"
 
   def project do
     [
@@ -42,9 +42,8 @@ defmodule ExDocMakeup.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, "~> 0.18.3"},
-      {:makeup, "~> 0.5.0"},
-      # {:makeup_elixir, "~> 0.4.0"}
+      {:ex_doc, "~> 0.18.3", only: :dev},
+      {:makeup, "0.5.1"},
       {:makeup_elixir, "~> 0.5.0"}
     ]
   end

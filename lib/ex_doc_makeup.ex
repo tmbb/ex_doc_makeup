@@ -8,7 +8,6 @@ defmodule ExDocMakeup do
   play well with ExDoc.
   """
   alias Makeup.Formatters.HTML.HTMLFormatter
-  alias ExDocMakeup.SourceIncludePlugin
   alias ExDocMakeup.CodeRenderer
 
   @behaviour ExDoc.Markdown
@@ -55,9 +54,7 @@ defmodule ExDocMakeup do
   # Internal details
   defp as_html!(source, options) do
     Earmark.as_html!(source,
-      %{options |
-          render_code: &CodeRenderer.code_renderer/1,
-          plugins: %{"" => SourceIncludePlugin}})
+      %{options | render_code: &CodeRenderer.code_renderer/1,})
   end
 
   # TODO: Generalize this to more languages.

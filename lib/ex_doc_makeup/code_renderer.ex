@@ -2,14 +2,17 @@ defmodule ExDocMakeup.CodeRenderer do
   @moduledoc false
 
   alias Earmark.Block
+  alias Makeup.Lexers.ElixirLexer
 
-  @supported_languages ["elixir"]
+  @supported_lexers [
+    ElixirLexer
+  ]
 
   # By default, we assume that a code block contains Elixir code until told otherwise.
   # ExDoc is supposed to be used with Elixir projects after all.
-  defp pick_language(nil), do: "elixir"
-  defp pick_language("elixir"), do: "elixir"
-  defp pick_language(other), do: other
+  defp pick_lexer(nil), do: ElixirLexer
+  defp pick_lexer("elixir"), do: ElixirLexer
+  defp pick_lexer(other), do: other
 
   defp escape_html_entities(string) do
     escape_map = [{"&", "&amp;"}, {"<", "&lt;"}, {">", "&gt;"}, {~S("), "&quot;"}]
@@ -18,23 +21,15 @@ defmodule ExDocMakeup.CodeRenderer do
     end
   end
 
-  # !begin: get_options
-  # Get the options from the app's environment
-  defp get_options() do
-    Application.get_env(:ex_doc_makeup, :config_options, %{})
-  end
-  # !end: get_options
-
   def code_renderer(%Block.Code{lines: lines, language: language}) do
-    # options = ExDoc.Markdown.get_markdown_processor_options()
-    lang = pick_language(language)
-    lexer_options = Map.get(get_options(), lang, [])
-    if lang in @supported_languages do
+    # For now, remove support for lexer options
+    lexer = pick_lexer(language)
+    if lexer in @supported_lexers do
       # This branch doesn't need HTML entities to be escaped because
       # Makeup takes care of all the escaping.
       lines
       |> Enum.join("\n")
-      |> Makeup.highlight_inner_html(lexer: lang, lexer_options: lexer_options)
+      |> Makeup.highlight_inner_html(lexer: lexer)
     else
       # In this branch, the text is included "raw", so we need to escape.
       lines

@@ -4,8 +4,8 @@ defmodule ExDocMakeup.SourceIncludePlugin do
 
   defp is_fragment_marker?(line, marker) do
     trimmed = String.trim_leading(line)
-    String.starts_with?(trimmed, "#{marker} !begin:") or
-      String.starts_with?(trimmed, "#{marker} !end:")
+    String.starts_with?(trimmed, "#{marker}! begin:") or
+      String.starts_with?(trimmed, "#{marker}! end:")
   end
 
   defp reject_fragment_markers(lines, marker) do
