@@ -51,6 +51,10 @@ defmodule ExDocMakeup do
     Application.put_env(:ex_doc_makeup, :config_options, processed_options)
   end
 
+  def available? do
+    true
+  end
+
   # Internal details
   defp as_html!(source, options) do
     Earmark.as_html!(source,
