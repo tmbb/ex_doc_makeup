@@ -44,7 +44,7 @@ defmodule ExDocMakeup.Mixfile do
     [
       {:ex_doc, "~> 0.18.3", only: :dev},
       {:makeup, "0.5.1"},
-      {:makeup_elixir, "~> 0.5.0"}
+      {:makeup_elixir, "~> 0.5.1"}
     ]
   end
 end
